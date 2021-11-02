@@ -1,32 +1,46 @@
 import random
 from typing import final
 
-def diceFunc():
-    dices = list()
-    finalDices = 0
-    diceCountSTR = input("Quantos dados você deseja rolar?")
-    diceCount = int(diceCountSTR)
-    diceChoice = input("Qual dado você deseja rolar? D6 ou D20?")
-    if(diceChoice == "D6" or "d6" or "6"):
-        list1 = [1,2,3,4,5,6]
-        for diceCount in list1:
-            diceRnd = random.choice(list1)
-            dices.append(diceRnd)
-        finalDices = sum(dices)
-        print("O valor final é: ", finalDices)
-        print("Os dados rolados foram:", dices)      
-    elif(diceChoice == "D20" or "d20" or "20"):
-        list1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-        for diceCount in list1:
-            diceRnd = random.choice(list1)
-            dices.append(diceRnd)
-        finalDices = sum(dices)
-        print("O valor final é: ", finalDices)
-        print("Os dados rolados foram:", dices)   
+def d6(number):
+    moreDices = 0
+    for qtd in range(0,number):
+        diceRnd = random.randint(1, 6)
+        moreDices = moreDices + diceRnd
+    return moreDices
+
+def d20(number):
+    moreDices = 0
+    for qtd in range(0,number):
+        diceRnd = random.randint(1,20)
+        moreDices = moreDices + diceRnd
+        if diceRnd == 20:
+            print("Um vinte natural!")
+            return moreDices
+    return moreDices
+
+def d10(number):
+    moreDices = 0
+    for qtd in range(0,number):
+        diceRnd = random.randint(1,10)
+        moreDices = moreDices + diceRnd
+    return moreDices
+
+def jogar():
+    quest = input("Olá, bravo jogador! Quantos dados você deseja lançar?")
+    quant = int(quest)
+    diceChoice = input("E qual dado você quer jogar no campo de batalha? D6, D10 ou D20?")
+    if diceChoice == "D6":
+        y= d6(quant)
+        print(y)
+    elif diceChoice =="D10":
+        y = d10(quant)
+        print(y)
+    elif diceChoice == "D20":
+        y = d20(quant)
+        print(y)
     else:
-        print("Você não digitou um dado válido, tente novamente")
-        diceFunc()
-    
+        print("Você não digitou um dado válido, caro player! VOCÊ NÃO IRÁ PARA VALHALLA!!! Sike, tente novamente!")
+        jogar()
 
+jogar()
 
-diceFunc()
