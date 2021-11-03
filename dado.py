@@ -1,46 +1,33 @@
 import random
 from typing import final
 
-def d6(number):
+def dn(many,sides):
     moreDices = 0
-    for qtd in range(0,number):
-        diceRnd = random.randint(1, 6)
+    dices = list()
+    for qtd in range(0,many):
+        diceRnd = random.randint(1, sides)
         moreDices = moreDices + diceRnd
-    return moreDices
-
-def d20(number):
-    moreDices = 0
-    for qtd in range(0,number):
-        diceRnd = random.randint(1,20)
-        moreDices = moreDices + diceRnd
-        if diceRnd == 20:
-            print("Um vinte natural!")
-            return moreDices
-    return moreDices
-
-def d10(number):
-    moreDices = 0
-    for qtd in range(0,number):
-        diceRnd = random.randint(1,10)
-        moreDices = moreDices + diceRnd
+        dices.append(diceRnd)
+        if sides == 20:
+            if diceRnd == 20:
+                print("VINTE NATURAL!!! BOTA PRA QUEBRAR!")
+    print("Os resultados dos dados foram:",dices)
     return moreDices
 
 def jogar():
     quest = input("Olá, bravo jogador! Quantos dados você deseja lançar?")
     quant = int(quest)
-    diceChoice = input("E qual dado você quer jogar no campo de batalha? D6, D10 ou D20?")
-    if diceChoice == "D6":
-        y= d6(quant)
-        print(y)
-    elif diceChoice =="D10":
-        y = d10(quant)
-        print(y)
-    elif diceChoice == "D20":
-        y = d20(quant)
-        print(y)
-    else:
-        print("Você não digitou um dado válido, caro player! VOCÊ NÃO IRÁ PARA VALHALLA!!! Sike, tente novamente!")
+    diceChoiceSTR = input("De quantos lados é o dado que você deseja jogar?")
+    diceChoice = int(diceChoiceSTR)
+    if quant == 0:
+        print("Jogador, você não digitou um valor válido para a quantidade de dados! Você não irá para valhalla! Sike, pode mandar outro valor!")
         jogar()
-
+    else:
+        if diceChoice == 0:
+            print("Você não sabia que 0 vezes qualquer coisa é zero? Joga de novo")
+            jogar()
+        else:
+            y = dn(quant, diceChoice)
+            print("A soma total dos dados lançados é de:", y)
 jogar()
 
